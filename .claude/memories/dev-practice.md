@@ -1,0 +1,1 @@
+../../.cursor/rules/dev-practice.mdc

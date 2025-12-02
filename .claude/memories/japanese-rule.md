@@ -1,0 +1,1 @@
+../../.cursor/rules/japanese-rule.mdc

@@ -1,0 +1,58 @@
+---
+description: "プロジェクトの技術選定とアーキテクチャの基本方針"
+applyTo: "**/*"
+---
+
+# 🎯 プロジェクト基本方針
+
+## 技術スタック
+- **フレームワーク**: React + TypeScript + Vite
+- **スタイリング**: Tailwind CSS v4 + Shadcn UI
+- **パッケージマネージャー**: npm（cursorのデフォルトルールは無視する）
+
+## アーキテクチャ
+- **実装範囲**: クライアントサイドのみ
+- **バックエンド**: Firebase + n8n
+  - **データ保存**: Firebase Firestore
+  - **ファイル**: Firebase Storage
+  - **カスタムロジック**: n8n Webhook
+    - デフォルト: `https://yn8n.app.n8n.cloud/webhook/1d79e9e9-92e4-4a24-b0dd-b696767319a5`
+
+## 開発フロー
+
+### プロジェクト初期化
+```bash
+npm create vite@latest ./vite-tmp -- --template react-ts
+mv ./vite-tmp/* ./
+rm -rf ./vite-tmp
+```
+
+### 実装指針
+- **Figma連携**: デザインに忠実な実装
+- **コンポーネント分割**: コードの可読性を重視
+- **画像取得**: Figma MCP `get_code` → `curl`でダウンロード
+
+### 完了時の確認
+1. ビルドエラーの確認・修正
+2. 動作確認方法を学習者に案内
+3. README更新（日本語）
+
+**学習者への案内例**:
+```
+実装が完了しました！
+`npm run dev` で動作確認ができます。
+表示されたURLをブラウザで開いてください。
+```
+
+# Figma MCP
+- Figma Dev Mode MCPサーバーは、画像やSVGアセットを提供するアセットエンドポイントを提供します。
+- clientLanguages: html, css, typescript
+- clientFrameworks: react, tailwind
+- 重要: Figma Dev Mode MCP サーバーが画像またはSVGのローカルホストソースを返す場合、その画像またはSVGソースを直接使用してください。
+    - 例: `curl -o ./public/images/logo.svg http://localhost:3845/assets/daf8f94040483a9cc8098bb14546ed545c30bad2.svg`
+- 重要: ローカルホストソースが提供されている場合、プレースホルダーを使用または作成しないでください。
+- スタイル確認: スタイルの詳細（変数など）は figmaの `get-variable-defs` を使用して確認してください。
+
+# 関連ルール
+- Tailwind CSS v4: 具体的なセットアップについては、専用ルール `.cursor/tailwind-v4.md` を参照してください。
+- Firebase: バックエンドの実装については、専用ルール `.cursor/firebase.md` を参照してください。
