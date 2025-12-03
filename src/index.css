@@ -1,0 +1,86 @@
+
+@import "tailwindcss";
+
+/* 日本語フォントを読み込む: Zen Maru Gothic (本文) と Shippori Mincho (タイトル) */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=Shippori+Mincho:wght@400;700&display=swap');
+
+html, body, #root {
+  height: 100%;
+}
+
+:root {
+  --kamikke-icon: #2b5966; /* アイコンの統一色 */
+}
+
+body {
+  font-family: 'Zen Maru Gothic', 'Noto Sans JP', system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  /* 背景をやや濃い黄味に調整 */
+  background: linear-gradient(180deg, #fff7d9 0%, #f7ecd0 100%);
+}
+
+/* ページルート: Figma 指定の高さ・flex挙動・背景グラデーション */
+.page-root {
+  min-height: 100vh;
+  align-self: stretch;
+  /* 背景の黄味を少し濃くして温かみを強める */
+  background: linear-gradient(135deg, #FFFBEB 0%, #FFF1C6 100%);
+}
+/* 内側の影を少し強めにするためのユーティリティ */
+.shadow-inner {
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* 小さいユーティリティ */
+.card-corner {
+  width: 18px;
+  height: 18px;
+  background: rgba(255,255,255,0.7);
+  position: absolute;
+}
+
+/* フォーム内の placeholder を淡く */
+input::placeholder, textarea::placeholder {
+  color: rgba(107,114,128,0.7);
+}
+
+/* 背景モチーフ用のふわふわアニメーション */
+@keyframes kamikke-float {
+  0% { transform: translate3d(0, -12px, 0); }
+  50% { transform: translate3d(12px, 12px, 0) rotate(-1deg); }
+  100% { transform: translate3d(0, -12px, 0); }
+}
+
+.float-slow {
+  animation: kamikke-float 10s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.float-medium {
+  animation: kamikke-float 7s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.float-fast {
+  animation: kamikke-float 4.8s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes kamikke-float-strong {
+  0% { transform: translate3d(0, -20px, 0) rotate(0deg); }
+  50% { transform: translate3d(20px, 20px, 0) rotate(2deg); }
+  100% { transform: translate3d(0, -20px, 0) rotate(0deg); }
+}
+
+.float-strong {
+  animation: kamikke-float-strong 9s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* モチーフの回転や位置変化がある要素は pointer-events なし を維持 */
+.bg-motif { pointer-events: none; }
+
+/* ラベル用アイコンの共通スタイル */
+.label-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+  flex-shrink: 0;
+}
